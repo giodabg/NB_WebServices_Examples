@@ -99,13 +99,16 @@ public class WS_Phone extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      *
-     * example of use: http://localhost:8080/phoneBook/gigi
+     * examples of use: 
+     *    http://localhost:8080/phoneBook/gigi
+     *    http://localhost:8080/phoneBook/lucia?descr=si
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String name;
         String number;
+        String description = "";
         String url;
         String[] url_section;
         // verifica stato connessione a DBMS
@@ -126,11 +129,20 @@ public class WS_Phone extends HttpServlet {
             return;
         }
         try {
+            String descrizione = request.getParameter("descr");
+            String sql = "SELECT name, number";
+            if (descrizione != null && descrizione.equals("si"))
+                sql += ", description";
+            sql += " FROM Phonebook WHERE Name = '" + name + "';";
             // ricerca nominativo nel database
             Statement statement = phonebook.createStatement();
-            ResultSet result = statement.executeQuery("SELECT Number FROM Phonebook WHERE Name = '" + name + "';");
+            ResultSet result = statement.executeQuery(sql);
             if (result.next()) {
                 number = result.getString(1);
+                if (descrizione != null && descrizione.equals("si")) {
+                    description = result.getString(2);
+                }
+                    
             } else {
                 response.sendError(404, "Entry not found!");
                 result.close();
@@ -151,6 +163,13 @@ public class WS_Phone extends HttpServlet {
                 out.print("<number>");
                 out.print(number);
                 out.println("</number>");
+                
+                if (descrizione != null && descrizione.equals("si")) {
+                    out.print("<description>");
+                    out.print(description);
+                    out.println("</description>");
+                    
+                }
                 out.println("</entry>");
             } finally {
                 out.close();
