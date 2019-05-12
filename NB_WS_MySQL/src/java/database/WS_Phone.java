@@ -138,9 +138,9 @@ public class WS_Phone extends HttpServlet {
             Statement statement = phonebook.createStatement();
             ResultSet result = statement.executeQuery(sql);
             if (result.next()) {
-                number = result.getString(1);
+                number = result.getString(2);
                 if (descrizione != null && descrizione.equals("si")) {
-                    description = result.getString(2);
+                    description = result.getString(3);
                 }
                     
             } else {
