@@ -1,2 +1,2 @@
 # NB_WebServices_Examples
-Esercizi sui web seervice in ambiente Java Netbeans
+Esercizi sui web service in ambiente Java Netbeans
