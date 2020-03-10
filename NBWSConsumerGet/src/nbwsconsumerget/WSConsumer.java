@@ -23,13 +23,19 @@ import javax.net.ssl.HttpsURLConnection;
 public class WSConsumer {
 
     private String result;
-    // http://www.gerriquez.com/web-service-comuni-italiani.html
-    private String prefix = "https://www.gerriquez.com/comuni/ws.php?";
+    
+    private String prefix;
 
     WSConsumer() {
+        // http://www.gerriquez.com/web-service-comuni-italiani.html
         result = "";
+        prefix = "https://www.gerriquez.com/comuni/ws.php?"
     }
 
+    WSConsumer(String str) {
+        result = "";
+        prefix = str;
+    }
     public String getResult() {
         return result;
     }
