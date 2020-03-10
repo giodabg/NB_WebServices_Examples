@@ -15,7 +15,7 @@ public class NBWSConsumerGet {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        WSConsumer webService = new WSConsumer();
+        WSConsumer webService = new WSConsumer("https://www.gerriquez.com/comuni/ws.php?");
         
         webService.get("dencomune", "Mariano Comense");
         webService.printResult();
