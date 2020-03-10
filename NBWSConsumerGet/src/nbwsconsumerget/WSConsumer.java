@@ -29,7 +29,7 @@ public class WSConsumer {
     WSConsumer() {
         // http://www.gerriquez.com/web-service-comuni-italiani.html
         result = "";
-        prefix = "https://www.gerriquez.com/comuni/ws.php?"
+        prefix = "https://www.gerriquez.com/comuni/ws.php?";
     }
 
     WSConsumer(String str) {
