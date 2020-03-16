@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package nbwsconsumerget;
+package nb_https_getlower;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -18,29 +18,44 @@ import javax.net.ssl.HttpsURLConnection;
 
 /**
  *
- * @author scuola
+ * @author Prof
  */
-public class WSConsumer {
+class WSConsumer {
 
     private String result;
     
     private String prefix;
+    private String parameters;
 
     WSConsumer() {
-        // http://www.gerriquez.com/web-service-comuni-italiani.html
+        reset();
+    }
+
+    void reset() {
         result = "";
-        prefix = "https://www.gerriquez.com/comuni/ws.php?";
+        parameters = "";
+        prefix = "";
     }
 
     WSConsumer(String str) {
         result = "";
+        parameters = "";
         prefix = str;
     }
     public String getResult() {
         return result;
     }
 
-    public int get(String paramater, String value) {
+    public void AddParameter (String paramater, String value) throws UnsupportedEncodingException {
+        if (!paramater.isEmpty() && !value.isEmpty()) {
+            if (parameters.isEmpty())
+                parameters = URLEncoder.encode(paramater, "UTF-8")+"="+URLEncoder.encode(value, "UTF-8");
+            else
+                parameters += "&" + URLEncoder.encode(paramater, "UTF-8")+"="+URLEncoder.encode(value, "UTF-8");
+        }
+    }
+    
+    public int get(String host) {
         int status = 0;
         result = "";
 
@@ -49,14 +64,17 @@ public class WSConsumer {
             HttpsURLConnection service;
             BufferedReader input;
 
-            String url = prefix
-                    + URLEncoder.encode(paramater, "UTF-8") + "="
-                    + URLEncoder.encode(value, "UTF-8");
+            String url;
+            if (parameters.isEmpty())
+                url = prefix;
+            else
+                url = prefix + "?" + parameters;
             serverURL = new URL(url);
             service = (HttpsURLConnection) serverURL.openConnection();
             // impostazione header richiesta
-            service.setRequestProperty("Host", "www.gerriquez.com");
-            service.setRequestProperty("Accept", "application/text");
+            service.setRequestProperty("Host", host);
+            service.setRequestProperty("Accept", "application/text");   // elenco dati accettabili dal client https://en.wikipedia.org/wiki/Media_type
+            service.setRequestProperty("Accept", "application/pdf");
             service.setRequestProperty("Accept-Charset", "UTF-8");
             // impostazione metodo di richiesta GET
             service.setRequestMethod("GET");
@@ -95,4 +113,5 @@ public class WSConsumer {
             System.out.println(arrOfStr[i]);
         }
     }
+    
 }
