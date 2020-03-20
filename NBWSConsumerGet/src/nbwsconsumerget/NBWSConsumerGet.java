@@ -21,7 +21,7 @@ public class NB_HTTPS_GETlower {
     public static void main(String[] args) {
 
             WSConsumer webService;
-            // webService = new WSConsumer("https://www.gerriquez.com/comuni/ws.php?");
+            // webService = new WSConsumer("https://www.gerriquez.com/comuni/ws.php");
             
             // webService.AddParameter("dencomune", "Mariano Comense");
             // webService.get("www.gerriquez.com");
