@@ -6,4 +6,5 @@ Esercizi sui web service in ambiente Java Netbeans
 3. NBWSConsumerGetPost	Come NBWSConsumerGet con aggiunta di POST
 
 ESEMPI CON ACCESSO A DATABASE
+
 4. NB_WS_MySQL	       Web Service Provider con uso GET-POST-PUT-DELETE su database
