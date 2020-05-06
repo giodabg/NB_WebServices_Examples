@@ -1,7 +1,7 @@
 # NB_WebServices_Examples
 Esercizi sui web service in ambiente Java Netbeans
 
-1. NB11_WS_Test	    Web Service Provider associato al tutorial "Creare Web Service Produccer" presente in Agorà
+1. NB11_WS_Test	    Web Service Provider associato al tutorial "Creare Web Service Produccer"
 2. NBWSConsumerGet	  Esempio di uso librerie standar di JAVA per eseguire GET con chiamata pagine .php o download di pagine file .pdf o ...
 3. NBWSConsumerGetPost	Come NBWSConsumerGet con aggiunta di POST
 
